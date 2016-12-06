@@ -61,9 +61,17 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
 
+#Doctrine Cache
 doctrine_cache:
     providers:
         my_markdown_cache:
             type: %cache_type%
             file_system:
                 directory: %kernel.cache_dir%/markdown_cache
+
+#Doctrine Migrations
+doctrine_migrations:
+    dir_name: "%kernel.root_dir%/DoctrineMigrations"
+    namespace: Application\Migrations
+    table_name: migration_versions
+    name: Application Migrations
