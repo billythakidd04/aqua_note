@@ -36,6 +36,11 @@ class Genus
      */
     private $funFact;
 
+//    /**
+//     * @ORM\Column(type="datetime")
+//     */
+//    private $updatedAt;
+
     /**
      * @return mixed
      */
@@ -98,6 +103,22 @@ class Genus
     public function setFunFact($funFact)
     {
         $this->funFact = $funFact;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdatedAt()
+    {
+        return new \DateTime('-'.rand(0,100).' days');//$this->updatedAt;
+    }
+
+    /**
+     * @param mixed $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
     }
 
 
