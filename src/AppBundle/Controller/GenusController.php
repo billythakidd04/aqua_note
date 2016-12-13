@@ -35,7 +35,8 @@ class GenusController extends Controller
     public function listAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $genuses = $em->getRepository('AppBundle:Genus')->findAll();
+        $genuses = $em->getRepository('AppBundle:Genus')
+            ->findAllOrderedBySize();
 
         return $this->render('genus/list.html.twig', [
                 'genuses' => $genuses,
@@ -43,7 +44,9 @@ class GenusController extends Controller
     }
 
     /**
+     * @param $genusName
      * @Route("/genus/{genusName}", name="genus_show")
+     * @return Response
      */
     public function showAction($genusName)
     {
@@ -79,8 +82,10 @@ class GenusController extends Controller
     }
 
     /**
+     * @param $genusName
      * @Route("/genus/{genusName}/notes", name="genus_show_notes")
      * @Method("GET")
+     * @return JsonResponse
      */
     public function getNotesAction($genusName)
     {
@@ -90,7 +95,8 @@ class GenusController extends Controller
             ['id' => 3, 'username' => 'AquaPelham', 'avatarUri' => '/images/leanna.jpeg', 'note' => 'Inked!', 'date' => 'Aug. 20, 2015'],
         ];
         $data = [
-            'notes' => $notes
+            'notes' => $notes,
+            'genusName' => $genusName,
         ];
 
         return new JsonResponse($data);
