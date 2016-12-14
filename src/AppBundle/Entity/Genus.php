@@ -36,32 +36,15 @@ class Genus
      */
     private $funFact;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
 
     /**
      * @ORM\Column(type="boolean")
      */
     private $isPublished = true;
-
-//    /**
-//     * @ORM\Column(type="datetime")
-//     */
-//    private $updatedAt;
-
-
-    /**
-     * @return mixed
-     */
-    public function getIsPublished()
-    {
-        return $this->isPublished;
-    }
-    /**
-     * @param mixed $isPublished
-     */
-    public function setIsPublished($isPublished)
-    {
-        $this->isPublished = $isPublished;
-    }
 
     /**
      * @return mixed
@@ -143,5 +126,18 @@ class Genus
         $this->updatedAt = $updatedAt;
     }
 
-
+    /**
+     * @return mixed
+     */
+    public function getIsPublished()
+    {
+        return $this->isPublished;
+    }
+    /**
+     * @param mixed $isPublished
+     */
+    public function setIsPublished($isPublished)
+    {
+        $this->isPublished = $isPublished;
+    }
 }
