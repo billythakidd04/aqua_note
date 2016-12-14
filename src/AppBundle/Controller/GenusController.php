@@ -45,7 +45,7 @@ class GenusController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $genuses = $em->getRepository('AppBundle:Genus')
-            ->findAllPublishedOrderedBySize();
+            ->findAllPublishedOrderedByRecentlyActive();
 
         return $this->render('genus/list.html.twig', [
                 'genuses' => $genuses,
@@ -59,8 +59,11 @@ class GenusController extends Controller
      */
     public function showAction($genusName)
     {
+        /** @var  $em */
         $em = $this->getDoctrine()->getManager();
-        $genus = $em->getRepository("AppBundle:Genus")->findOneBy(['name' => $genusName]);
+        /** @var Genus $genus */
+        $genus = $em->getRepository("AppBundle:Genus")
+            ->findOneBy(['name' => $genusName]);
 
         if(!$genus)
         {
@@ -85,8 +88,12 @@ class GenusController extends Controller
 
         $this->get('logger')->info('Showing genus: '.$genusName);
 
+        $recentNotes = $em->getRepository('AppBundle:GenusNote')
+            ->findAllRecentNotesForGenus($genus);
+
         return $this->render('genus/show.html.twig', array(
             'genus' => $genus,
+            'recentNoteCount' => count($recentNotes),
         ));
     }
 
